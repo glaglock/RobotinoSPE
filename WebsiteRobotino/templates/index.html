@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Übersicht</h1>
+    
+    <a href="{{ url_for('control') }}" style="padding: 10px; background-color: #009999; color: white; text-decoration: none; border-radius: 5px; display: block; margin-bottom:10px">
+        Steuerung
+    </a>
+    
+    <a href="{{ url_for('batteryManagement') }}" style="padding: 10px; background-color: #009999; color: white; text-decoration: none; border-radius: 5px; display: block; margin-bottom:10px">
+        Akkumanagement
+    </a>
+
+    <a href="{{ url_for('logout') }}" style="padding: 10px; background-color: #ff3333; color: white; text-decoration: none; border-radius: 5px; display: block; margin-bottom:10px">
+        Log Out
+    </a>
+{% endblock %}
