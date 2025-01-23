@@ -3,6 +3,59 @@ from werkzeug.exceptions import abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta, datetime, timezone
 import time
+import RPi.GPIO as GPIO
+
+#BCM numbering 
+GPIO.setmode(GPIO.BCM) 
+
+#Define GPIO Pins
+
+#Pins Motor A
+IN1_A_A = 2 # Motor A direction 1 ( Physical Pin  13) 
+IN2_A_A = 3 # Motor A direction 2 ( Physical Pin  15) 
+ENABLE_A_A = 12 # PWM Signal Motor A ( Physical Pin 19) 
+
+#Pins Motor B 
+IN3_B_B = 4 # Motor A direction 1 ( Physical Pin  16) 
+IN4_B_B = 5 # Motor A direction 2 ( Physical Pin  18) 
+ENABLE_B_B = 13 # PWM Signal Motor B ( Physical Pin 21) 
+
+#Pins Motor C
+IN1_A_C = 27 # Motor A direction 1 ( Physical Pin  36) 
+IN2_A_C = 22 # Motor A direction 2 ( Physical Pin  31) 
+ENABLE_A_C = 18 # PWM Signal Motor C ( Physical Pin 12)
+
+#Pins Motor D
+IN3_B_D = 10 # Motor A direction 1 ( Physical Pin  24) 
+IN4_B_D = 9  # Motor A direction 2 ( Physical Pin  5) 
+ENABLE_B_D = 19 # PWM Signal Motor A ( Physical Pin 35)
+  
+
+
+#Set up GPIO pins as outputs 
+
+#Motor A
+GPIO.setup(IN1_A_A, GPIO.OUT) 
+GPIO.setup(IN2_A_A, GPIO.OUT) 
+GPIO.setup(ENABLE_A_A, GPIO.OUT) 
+
+#Motor B
+GPIO.setup(IN3_B_B, GPIO.OUT) 
+GPIO.setup(IN4_B_B, GPIO.OUT) 
+GPIO.setup(ENABLE_B_B, GPIO.OUT) 
+
+#Motor C
+GPIO.setup(IN1_A_C, GPIO.OUT) 
+GPIO.setup(IN2_A_C, GPIO.OUT) 
+GPIO.setup(ENABLE_A_C, GPIO.OUT) 
+
+#Motor D
+GPIO.setup(IN3_B_D, GPIO.OUT) 
+GPIO.setup(IN4_B_D, GPIO.OUT) 
+GPIO.setup(ENABLE_B_D, GPIO.OUT) 
+
+
+# Website Code 
 
 web = Flask(__name__) 
 web.config['SECRET_KEY'] = 'RobotinoSPE' 
@@ -72,6 +125,20 @@ def control():
 @web.route('/jogForward', methods=['GET', 'POST']) 
 def jogForward(): 
     print("Moving Forward...") 
+    
+    GPIO.output(IN1_A_A, GPIO.HIGH)
+    GPIO.output(IN2_A_A, GPIO.LOW)
+    
+    GPIO.output(IN3_B_B, GPIO.HIGH)
+    GPIO.output(IN4_B_B, GPIO.LOW)
+    
+    GPIO.output(IN1_A_C, GPIO.HIGH)
+    GPIO.output(IN2_A_C, GPIO.LOW)
+    
+    GPIO.output(IN3_B_D, GPIO.HIGH)
+    GPIO.output(IN4_B_D, GPIO.LOW)
+    
+    
     time.slepp(5)
 
     return render_template('control.html') 
@@ -80,15 +147,41 @@ def jogForward():
 @web.route('/jogBackward', methods=['GET', 'POST'])
 def jogBackward(): 
     print("Moving Backward...") 
-
+    
+    GPIO.output(IN1_A_A, GPIO.LOW)
+    GPIO.output(IN2_A_A, GPIO.HIGH)
+    
+    GPIO.output(IN3_B_B, GPIO.LOW)
+    GPIO.output(IN4_B_B, GPIO.HIGH)
+    
+    GPIO.output(IN1_A_C, GPIO.LOW)
+    GPIO.output(IN2_A_C, GPIO.HIGH)
+    
+    GPIO.output(IN3_B_D, GPIO.LOW)
+    GPIO.output(IN4_B_D, GPIO.HIGH)
+    
     time.sleep(5)
-
     return render_template('control.html') 
 
 
 @web.route('/jogLeft', methods=['GET', 'POST'])
 def jogLeft(): 
     print("Moving Left...") 
+    
+    GPIO.output(IN1_A_A, GPIO.HIGH)
+    GPIO.output(IN2_A_A, GPIO.LOW)
+    
+    GPIO.output(IN3_B_B, GPIO.LOW)
+    GPIO.output(IN4_B_B, GPIO.HIGH)
+    
+    GPIO.output(IN1_A_C, GPIO.HIGH)
+    GPIO.output(IN2_A_C, GPIO.LOW)
+    
+    GPIO.output(IN3_B_D, GPIO.LOW)
+    GPIO.output(IN4_B_D, GPIO.HIGH)
+    
+   
+    
     time.sleep(5)
 
     return render_template('control.html') 
@@ -96,6 +189,20 @@ def jogLeft():
 @web.route('/jogRight', methods=['GET', 'POST'])
 def jogRight(): 
     print("Moving Right...") 
+    
+    GPIO.output(IN1_A_A, GPIO.LOW)
+    GPIO.output(IN2_A_A, GPIO.HIGH)
+    
+    GPIO.output(IN3_B_B, GPIO.HIGH)
+    GPIO.output(IN4_B_B, GPIO.LOW)
+    
+    GPIO.output(IN1_A_C, GPIO.LOW)
+    GPIO.output(IN2_A_C, GPIO.HIGH)
+    
+    GPIO.output(IN3_B_D, GPIO.HIGH)
+    GPIO.output(IN4_B_D, GPIO.LOW)
+    
+    
     time.sleep(5)
 
     return render_template('control.html') 
