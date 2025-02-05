@@ -6,29 +6,29 @@ import time
 import RPi.GPIO as GPIO
 
 #BCM numbering 
-GPIO.setmode(GPIO.BCM) 
+GPIO.setmode(GPIO.BOARD) 
 
 #Define GPIO Pins
 
 #Pins Motor A
-IN1_A_A = 2 # Motor A direction 1 ( Physical Pin  13) 
-IN2_A_A = 3 # Motor A direction 2 ( Physical Pin  15) 
-ENABLE_A_A = 12 # PWM Signal Motor A ( Physical Pin 19) 
+IN1_A_A = 13 # Motor A direction 1 ( Physical Pin  13) 
+IN2_A_A = 15 # Motor A direction 2 ( Physical Pin  15) 
+ENABLE_A_A = 19 # PWM Signal Motor A ( Physical Pin 19) 
 
 #Pins Motor B 
-IN3_B_B = 4 # Motor A direction 1 ( Physical Pin  16) 
-IN4_B_B = 5 # Motor A direction 2 ( Physical Pin  18) 
-ENABLE_B_B = 13 # PWM Signal Motor B ( Physical Pin 21) 
+IN3_B_B = 16 # Motor A direction 1 ( Physical Pin  16) 
+IN4_B_B = 18 # Motor A direction 2 ( Physical Pin  18) 
+ENABLE_B_B = 21 # PWM Signal Motor B ( Physical Pin 21) 
 
 #Pins Motor C
-IN1_A_C = 27 # Motor A direction 1 ( Physical Pin  36) 
-IN2_A_C = 22 # Motor A direction 2 ( Physical Pin  31) 
-ENABLE_A_C = 18 # PWM Signal Motor C ( Physical Pin 12)
+IN1_A_C = 36 # Motor A direction 1 ( Physical Pin  36) 
+IN2_A_C = 31 # Motor A direction 2 ( Physical Pin  31) 
+ENABLE_A_C = 12 # PWM Signal Motor C ( Physical Pin 12)
 
 #Pins Motor D
-IN3_B_D = 10 # Motor A direction 1 ( Physical Pin  24) 
-IN4_B_D = 9  # Motor A direction 2 ( Physical Pin  5) 
-ENABLE_B_D = 19 # PWM Signal Motor A ( Physical Pin 35)
+IN3_B_D = 24 # Motor A direction 1 ( Physical Pin  24) 
+IN4_B_D = 5  # Motor A direction 2 ( Physical Pin  5) 
+ENABLE_B_D = 35 # PWM Signal Motor A ( Physical Pin 35)
   
 
 
@@ -139,7 +139,7 @@ def jogForward():
     GPIO.output(IN4_B_D, GPIO.LOW)
     
     
-    time.slepp(5)
+    time.sleep(5)
 
     return render_template('control.html') 
 
